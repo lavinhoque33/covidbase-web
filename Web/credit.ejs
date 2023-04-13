@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script
+            src="https://code.jquery.com/jquery-3.5.0.js"
+            integrity="sha256-r/AaFHrszJtwpe+tHyNi/XCfMxYpbsRg2Uqn0x3s2zc="
+            crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+            integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+            crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+            integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+            crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap-4-autocomplete/dist/bootstrap-4-autocomplete.min.js"
+            crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/js/all.min.js"></script>
+    <script>
+    </script>
+
+    <title>COVID-19Base 1.0</title>
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+          integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
+
+    <style>
+        .navbar {
+            background-color: #484848;
+        }
+
+        .navbar .navbar-nav .nav-link {
+            color: #fff;
+        }
+
+        .navbar .navbar-nav .nav-link:hover {
+            color: #fbc531;
+        }
+
+        .navbar .navbar-nav .active > .nav-link {
+            color: #fbc531;
+        }
+
+        body {
+            font-family: "Palatino Linotype" !important;
+        }
+
+        .dropdown-menu {
+            height: 50vh;
+            overflow: auto;
+            -webkit-overflow-scrolling: touch;
+            font-size: small;
+        }
+    </style>
+</head>
+
+<body>
+
+<!--- Navbar --->
+<nav class="navbar navbar-expand-lg">
+    <div class="container-fluid">
+        <a class="navbar-brand text-white" href="/search"><img style="width: 30px;" src="https://i.imgur.com/f4XhsDH.png"></img>COVID-19Base</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#nvbCollapse"
+                aria-controls="nvbCollapse">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="nvbCollapse">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item active pl-1">
+                    <a class="nav-link" href="\search"><i class="fa fa-home fa-fw mr-1"></i>Home</a>
+                </li>
+                <li class="nav-item active pl-1">
+                    <a class="nav-link" href="\manual"><i class="fas fa-book fa-fw mr-1"></i>Manual</a>
+                </li>
+                <li class="nav-item active pl-1">
+                    <a class="nav-link" href="\credits"><i class="fas fa-address-book fa-fw mr-1"></i>Credits</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<!--# Navbar #-->
+
+<div>
+    <div class="jumbotron p-4"
+         style="background-image: url(https://i.imgur.com/HV4GHpu.jpg); background-size: cover; height: 40vh">
+        <div class="container" style="display: flex">
+            <div class="row no-gutters">
+                <div class="col-sm-2" style="margin: 10px">
+                    <img src="https://i.imgur.com/ZSODRvZ.png" width="170"/>
+                </div>
+                <div class="col-sm-9 text-center">
+                    <h1>COVID-19Base 1.0</h1>
+                    <span>
+                    COVID-19Base is the first comprehensive knowledgebase to find the association of seven different thematic areas related to COVID-19/SARS-CoV-2 and other coronavirus-related diseases in humans. While careful manual curation of the identified associations is the ultimate goal, in COVID-19Base, we implement a novel approach to estimate the effectiveness of drug for diseases based on natural language processing, sentiment analysis, and deep learning. We also apply the concept of cosine similarity to confidently infer the associations between diseases and genes, lncRNAs, miRNAs. The knowledgebase, we developed, will support the researcher around the world to discover the existing knowledge and find a solution for this pandemic.
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container pb-10">
+    <div class="row justify-content-center text-center no-gutters" style="margin-bottom: 25px">
+        <div class="col-sm-4">
+            <span class="text-center">
+                <h3 style="margin-bottom: 20px"><strong>Researchers in Collaboration:</strong></h3>
+                <ol>
+                    <li> Junaed Younus Khan </li>
+                    <li> Md. Tawkat Islam Khondaker </li>
+                    <li> Iram Tazim Hoque </li>
+                    <li> Hamada R.H. Al-Absi </li>
+                    <li> Mohammad Saifur Rahman </li>
+                    <li> Tanvir Alam </li>
+                    <li> M.Sohel Rahman </li>
+                </ol>
+            </span>
+        </div>
+        <div class="col-sm-8">
+            <div class="col-sm-12" style="margin-bottom: 30px">
+                <span class="text-center">
+                    <h3><strong>Collaborating Institutes:</strong></h3>
+                    <ol>
+                        <li> Department of Computer Science and Engineering, Bangladesh University of Engineering and Technology, Dhaka, Bangladesh.</li>
+                        <li> Information and Computing Technology Division, College of Science and Engineering, Hamad Bin Khalifa University, Doha, Qatar.</li>
+                    </ol>
+                </span>
+            </div>
+            <div class="col-sm-12">
+                <span class="text-center">
+                    <h3><strong>Relevant Publications:</strong></h3>
+
+                </span>
+            </div>
+        </div>
+    </div>
+    <div class="row justify-content-center text-center no-gutters">
+        <div class="col-sm-8">
+                <span class="text-center">
+                    <h3><strong>Contact Us:</strong></h3>
+                    <ol>
+                        <li> Dr. M. Sohel Rahman, Department of CSE, BUET, Department of Computer Science and Engineering, Bangladesh University of Engineering and Technology, Dhaka, Bangladesh. <br>
+                                Email: <a href="mailto:msrahman@cse.buet.ac.bd">msrahman@cse.buet.ac.bd</a>
+                        </li>
+                        <li> Dr. Tanvir Alam, Information and Computing Technology Division, College of Science and Engineering, Hamad Bin Khalifa University, Doha, Qatar. <br>
+                                Email: <a href="mailto:talam@hbku.edu.qa">talam@hbku.edu.qa</a>
+                        </li>
+                    </ol>
+                </span>
+        </div>
+    </div>
+</div>
+<div class="container-fluid" style="background-color: beige;padding-bottom: 20px;padding-top: 20px">
+    © 2020 All rights reserved. The use of COVID-19Base is free for academic and non-profit users.
+</div>
+
+<script>
+</script>
+</body>
+</html>

@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script
+            src="https://code.jquery.com/jquery-3.5.0.js"
+            integrity="sha256-r/AaFHrszJtwpe+tHyNi/XCfMxYpbsRg2Uqn0x3s2zc="
+            crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+            integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+            crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+            integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+            crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap-4-autocomplete/dist/bootstrap-4-autocomplete.min.js"
+            crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/js/all.min.js"></script>
+    <script>
+        let ddpairs = `<%- JSON.stringify(ddpairs) %>`;
+        ddpairs = JSON.parse(ddpairs);
+        let dgpairs = `<%- JSON.stringify(dgpairs) %>`;
+        dgpairs = JSON.parse(dgpairs);
+        let dmpairs = `<%- JSON.stringify(dmpairs) %>`;
+        dmpairs = JSON.parse(dmpairs);
+        let dlpairs = `<%- JSON.stringify(dlpairs) %>`;
+        dlpairs = JSON.parse(dlpairs);
+        let dppairs = `<%- JSON.stringify(dppairs) %>`;
+        dppairs = JSON.parse(dppairs);
+        let diseases = `<%- JSON.stringify(diseases) %>`;
+        diseases = JSON.parse(diseases);
+        let drugs = `<%- JSON.stringify(drugs) %>`;
+        drugs = JSON.parse(drugs);
+        let genes = `<%- JSON.stringify(genes) %>`;
+        genes = JSON.parse(genes);
+        let pdbs = `<%- JSON.stringify(pdbs) %>`;
+        pdbs = JSON.parse(pdbs);
+        let mirnas = `<%- JSON.stringify(mirnas) %>`;
+        mirnas = JSON.parse(mirnas);
+        let lncrnas = `<%- JSON.stringify(lncrnas) %>`;
+        lncrnas = JSON.parse(lncrnas);
+    </script>
+
+    <title>COVID-19Base 1.0</title>
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+          integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
+
+    <style>
+        .navbar {
+            background-color: #484848;
+        }
+
+        .navbar .navbar-nav .nav-link {
+            color: #fff;
+        }
+
+        .navbar .navbar-nav .nav-link:hover {
+            color: #fbc531;
+        }
+
+        .navbar .navbar-nav .active > .nav-link {
+            color: #fbc531;
+        }
+
+        body {
+            font-family: "Palatino Linotype" !important;
+        }
+
+        .dropdown-menu {
+            height: 50vh;
+            overflow: auto;
+            -webkit-overflow-scrolling: touch;
+            font-size: small;
+        }
+    </style>
+</head>
+
+<body>
+
+<!--- Navbar --->
+<nav class="navbar navbar-expand-lg">
+    <div class="container-fluid">
+        <a class="navbar-brand text-white" href="/search"><img style="width: 30px;" src="https://i.imgur.com/f4XhsDH.png"></img>COVID-19Base</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#nvbCollapse"
+                aria-controls="nvbCollapse">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="nvbCollapse">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item active pl-1">
+                    <a class="nav-link" href="\search"><i class="fa fa-home fa-fw mr-1"></i>Home</a>
+                </li>
+                <li class="nav-item active pl-1">
+                    <a class="nav-link" href="\manual"><i class="fas fa-book fa-fw mr-1"></i>Manual</a>
+                </li>
+                <li class="nav-item active pl-1">
+                    <a class="nav-link" href="\credits"><i class="fas fa-address-book fa-fw mr-1"></i>Credits</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<!--# Navbar #-->
+
+<div>
+    <div class="jumbotron p-4" style="background-color: beige;height: 30vh">
+        <div class="container my-auto">
+            <div class="float-left" style="margin: 10px">
+                <img src="https://i.imgur.com/ZSODRvZ.png" width="80"/>
+            </div>
+            <div>
+                <h1>COVID-19Base 1.0</h1>
+
+                <h3>A Comprehensive Knowledgebase for Coronaviruses</h3>
+
+                <!-- search box goes here -->
+                <div class="input-group">
+                    <input type="text" class="form-control" id="srch" placeholder="Search term...">
+                    <div class="input-group-btn search-panel">
+                        <select class="custom-select" id="categ" style="border: 1px solid firebrick">
+                            <option value="Drugs" selected>Drugs</option>
+                            <option value="Diseases">Diseases</option>
+                            <option value="Genes">Genes</option>
+                            <option value="miRNAs">miRNAs</option>
+                            <option value="lncRNAs">lncRNAs</option>
+                            <option value="PDBs">PDBs</option>
+                            <option value="Drug-Disease">Drugs-Diaseases</option>
+                            <option value="Disease-Gene">Diaseases-Genes</option>
+                            <option value="Disease-miRNA">Diaseases-miRNAs</option>
+                            <option value="Disease-lncRNA">Diaseases-lncRNAs</option>
+                            <option value="Drug-PDB">Drugs-PDBs</option>
+                        </select>
+                    </div>
+                    <span class="input-group-btn">
+                    <button class="btn btn-default" onclick="submitSearch()" type="button"
+                            style="border:1px solid aquamarine"><span class="fa fa-search fa-fw mr-1"></span></button>
+                </span>
+                </div>
+                <div>
+                    Examples: <a href="/Diseases/covid-19">covid-19</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <form action="/search" method="post" id="finalSub">
+        <input id="obje" type="text" name="retObject" style="display: none">
+    </form>
+</div>
+<div style="display: none" class="alert alert-danger alert-dismissible fade show" role="alert" id="ialert">
+    <strong>Invalid Search!</strong>
+    <button type="button" class="close" id="close" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+<div style="display: none" class="alert alert-danger alert-dismissible fade show" role="alert" id="ealert">
+    <strong>Search Box Empty!</strong>
+    <button type="button" class="close" id="close2" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+<div class="container-fluid pb-10">
+    <div class="row no-gutters justify-content-center text-center">
+        <iframe class="text-center" style="height: 75vh;width: 80vw;"
+                src="https://drive.google.com/file/d/1BzZl_DPfOX45ECZwUjHvsSe_5IV_T5xA/preview?usp=sharing?embedded=true"></iframe>
+    </div>
+</div>
+<div class="container-fluid" style="background-color: beige;padding-bottom: 20px;padding-top: 20px">
+    © 2020 All rights reserved. The use of COVID-19Base is free for academic and non-profit users.
+</div>
+
+<script>
+    $('#close2').click(function () {
+        $('#ealert').hide();
+    });
+    $("#srch").autocomplete({
+        source: drugs,
+        treshold: 1,
+        maximumItems: 100,
+        onSelectItem: function () {
+            $('#srch').focus();
+        },
+    });
+    $("#categ").change(function () {
+        let tmp = $(this).val();
+        if (tmp == 'Drug-Disease') {
+            $("#srch").autocomplete({
+                source: ddpairs,
+                treshold: 1,
+                maximumItems: 100,
+                onSelectItem: function () {
+                    $('#srch').focus();
+                },
+            });
+        } else if (tmp == 'Diseases') {
+            $("#srch").autocomplete({
+                source: diseases,
+                treshold: 1,
+                maximumItems: 100,
+                onSelectItem: function () {
+                    $('#srch').focus();
+                },
+            });
+        } else if (tmp == 'Drugs') {
+            $("#srch").autocomplete({
+                source: drugs,
+                treshold: 1,
+                maximumItems: 100,
+                onSelectItem: function () {
+                    $('#srch').focus();
+                },
+            });
+        } else if (tmp == 'Genes') {
+            $("#srch").autocomplete({
+                source: genes,
+                treshold: 1,
+                maximumItems: 100,
+                onSelectItem: function () {
+                    $('#srch').focus();
+                },
+            });
+        } else if (tmp == 'miRNAs') {
+            $("#srch").autocomplete({
+                source: mirnas,
+                treshold: 1,
+                maximumItems: 100,
+                onSelectItem: function () {
+                    $('#srch').focus();
+                },
+            });
+        } else if (tmp == 'lncRNAs') {
+            $("#srch").autocomplete({
+                source: lncrnas,
+                treshold: 1,
+                maximumItems: 100,
+                onSelectItem: function () {
+                    $('#srch').focus();
+                },
+            });
+        } else if (tmp == 'PDBs') {
+            $("#srch").autocomplete({
+                source: pdbs,
+                treshold: 1,
+                maximumItems: 100,
+                onSelectItem: function () {
+                    $('#srch').focus();
+                },
+            });
+        } else if (tmp == 'Disease-Gene') {
+            $("#srch").autocomplete({
+                source: dgpairs,
+                treshold: 1,
+                maximumItems: 100,
+                onSelectItem: function () {
+                    $('#srch').focus();
+                },
+            });
+        } else if (tmp == 'Disease-miRNA') {
+            $("#srch").autocomplete({
+                source: dmpairs,
+                treshold: 1,
+                maximumItems: 100,
+                onSelectItem: function () {
+                    $('#srch').focus();
+                },
+            });
+        } else if (tmp == 'Disease-lncRNA') {
+            $("#srch").autocomplete({
+                source: dlpairs,
+                treshold: 1,
+                maximumItems: 100,
+                onSelectItem: function () {
+                    $('#srch').focus();
+                },
+            });
+        } else if (tmp == 'Drug-PDB') {
+            $("#srch").autocomplete({
+                source: dppairs,
+                treshold: 1,
+                maximumItems: 100,
+                onSelectItem: function () {
+                    $('#srch').focus();
+                },
+            });
+        }
+    });
+    $('#srch').keypress(function (event) {
+
+        var keycode = (event.keyCode ? event.keyCode : event.which);
+        if (keycode == '13') {
+            submitSearch();
+        }
+
+    });
+
+    function submitSearch() {
+        var tmp1 = {};
+        tmp1.categ = $('#categ').val();
+        tmp1.search = $('#srch').val();
+        if (tmp1.search.length === 0)
+            $('#ealert').show();
+        else {
+            document.querySelector('#obje').value = JSON.stringify(tmp1);
+            document.querySelector('#finalSub').submit();
+        }
+    }
+</script>
+</body>
+</html>

@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <title>COVID-19Base 1.0</title>
+
+    <!-- Bootstrap core CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+          integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
+    <link href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/themes/smoothness/jquery-ui.css"
+          rel="stylesheet"/>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.11.0/bootstrap-table.css" rel="stylesheet"/>
+
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <style>
+        .navbar {
+            background-color: #484848;
+        }
+
+        .navbar .navbar-nav .nav-link {
+            color: #fff;
+        }
+
+        .navbar .navbar-nav .nav-link:hover {
+            color: #fbc531;
+        }
+
+        .navbar .navbar-nav .active > .nav-link {
+            color: #fbc531;
+        }
+
+        body {
+            font-family: "Palatino Linotype" !important;
+        }
+
+        .dropdown-menu {
+            height: 50vh;
+            overflow: auto;
+            -webkit-overflow-scrolling: touch;
+            font-size: small;
+            z-index: 100000;
+        }
+    </style>
+    <script>
+        let categ = '<%- stats %>';
+        let drug = '<%- drug %>';
+        let label = '<%- label %>';
+        let disease = '<%- disease %>';
+        let dbankid = '<%- dbankid %>';
+        let doid = '<%- doid %>';
+        let sps = `<%- JSON.stringify(sps) %>`;
+        sps = JSON.parse(sps);
+        let ddpairs = `<%- JSON.stringify(ddpairs) %>`;
+        ddpairs = JSON.parse(ddpairs);
+        let dgpairs = `<%- JSON.stringify(dgpairs) %>`;
+        dgpairs = JSON.parse(dgpairs);
+        let dmpairs = `<%- JSON.stringify(dmpairs) %>`;
+        dmpairs = JSON.parse(dmpairs);
+        let dlpairs = `<%- JSON.stringify(dlpairs) %>`;
+        dlpairs = JSON.parse(dlpairs);
+        let dppairs = `<%- JSON.stringify(dppairs) %>`;
+        dppairs = JSON.parse(dppairs);
+        let diseases = `<%- JSON.stringify(diseases) %>`;
+        diseases = JSON.parse(diseases);
+        let drugs = `<%- JSON.stringify(drugs) %>`;
+        drugs = JSON.parse(drugs);
+        let genes = `<%- JSON.stringify(genes) %>`;
+        genes = JSON.parse(genes);
+        let pdbs = `<%- JSON.stringify(pdbs) %>`;
+        pdbs = JSON.parse(pdbs);
+        let mirnas = `<%- JSON.stringify(mirnas) %>`;
+        mirnas = JSON.parse(mirnas);
+        let lncrnas = `<%- JSON.stringify(lncrnas) %>`;
+        lncrnas = JSON.parse(lncrnas);
+    </script>
+</head>
+
+<body>
+
+<div>
+    <!--- Navbar --->
+    <nav class="navbar navbar-expand-lg">
+        <div class="container-fluid">
+            <a class="navbar-brand text-white" href="/search"><img style="width: 30px;" src="https://i.imgur.com/f4XhsDH.png"></img>COVID-19Base</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#nvbCollapse"
+                    aria-controls="nvbCollapse">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="nvbCollapse">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item active pl-1">
+                        <a class="nav-link" href="\search"><i class="fa fa-home fa-fw mr-1"></i>Home</a>
+                    </li>
+                    <li class="nav-item active pl-1">
+                        <a class="nav-link" href="\manual"><i class="fas fa-book fa-fw mr-1"></i>Manual</a>
+                    </li>
+                    <li class="nav-item active pl-1">
+                        <a class="nav-link" href="\credits"><i class="fas fa-address-book fa-fw mr-1"></i>Credits</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <!--# Navbar #-->
+
+</div>
+
+<div>
+    <div class="jumbotron p-4" style="background-color: beige;height: 30vh">
+        <div class="container my-auto">
+            <div class="float-left" style="margin: 10px">
+                <img src="https://i.imgur.com/ZSODRvZ.png" width="80"/>
+            </div>
+            <div>
+                <h1>COVID-19Base 1.0</h1>
+
+                <h3>A Comprehensive Knowledgebase for Coronaviruses</h3>
+
+                <!-- search box goes here -->
+                <div class="input-group">
+                    <input type="text" class="form-control" id="srch" placeholder="Search term...">
+                    <div class="input-group-btn search-panel">
+                        <select class="custom-select" id="categ" style="border: 1px solid firebrick">
+                            <option value="Drugs" selected>Drugs</option>
+                            <option value="Diseases">Diseases</option>
+                            <option value="Genes">Genes</option>
+                            <option value="miRNAs">miRNAs</option>
+                            <option value="lncRNAs">lncRNAs</option>
+                            <option value="PDBs">PDBs</option>
+                            <option value="Drug-Disease">Drugs-Diaseases</option>
+                            <option value="Disease-Gene">Diaseases-Genes</option>
+                            <option value="Disease-miRNA">Diaseases-miRNAs</option>
+                            <option value="Disease-lncRNA">Diaseases-lncRNAs</option>
+                            <option value="Drug-PDB">Drugs-PDBs</option>
+                        </select>
+                    </div>
+                    <span class="input-group-btn">
+                    <button class="btn btn-default" onclick="submitSearch()" type="button"
+                            style="border:1px solid aquamarine"><span class="fa fa-search fa-fw mr-1"></span></button>
+                </span>
+                </div>
+                <div>
+                    Examples: <a href="/Diseases/covid-19">covid-19</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<form action="/search" method="post" id="finalSub">
+    <input id="obje" type="text" name="retObject" style="display: none">
+</form>
+<div style="display: none" class="alert alert-danger alert-dismissible fade show" role="alert" id="ealert">
+    <strong>Search Box Empty!</strong>
+    <button type="button" class="close" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+<div class="row justify-content-center">
+    <div style="display: none" class="alert alert-success fade show" role="alert" id="salert">
+        <strong>Suceesfully Submitted Feedback!</strong>
+    </div>
+</div>
+
+<div class="container-fluid">
+    <div>
+        <!--
+            Lower Container
+        -->
+
+        <div class="container-fluid" id="lower_container">
+
+            <div class="row" id="search-results-container">
+                <div class="col-sm-12" id="results-area">
+                    <div id="results">
+                        <div class="p-3 sticky-top" style="background-color: #d3ffc6" id="results-header">
+                            <h2 class="text-center">
+                                Drug:<span style="color: deepskyblue" class="font-italic" id="drg"></span><sub><a
+                                            target="_blank" class="font-italic" id="drglink">External Link</a><i
+                                            style="font-size: xx-small" class="fas fa-link fa-xs"></i></sub>&nbsp;Disease:<span
+                                        style="color: darkgreen" class="font-italic" id="dis"></span><sub><a
+                                            target="_blank" class="font-italic" id="dislink">External Link</a><i
+                                            style="font-size: xx-small" class="fas fa-link fa-xs"></i></sub>
+                            </h2><br>
+                            <h2 class="text-center">Label:<span style="color: cadetblue" class="font-italic"
+                                                                id="label"></span></h2>
+                        </div>
+
+
+                        <div class="container-fluid" id="resultQuery">
+                            <table class="table table-sm shadow p-2 mb-2 rounded-lg"
+                                   style="overflow:hidden;border-collapse: separate;border-spacing: 0 10px">
+                                <thead class="thead-dark">
+                                <tr>
+                                    <th style="width: 35%">Sentence</th>
+                                    <th style="width: 35%">Paper Title</th>
+                                    <th style="width: 15%">Paper DOI</th>
+                                    <th style="width: 15%">Feedback</th>
+                                </tr>
+                                </thead>
+                                <tbody id="resTable">
+
+                                </tbody>
+                            </table>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <hr/>
+
+</div>
+<!-- /container -->
+
+<footer id="foot">
+    <div class="container-fluid" style="background-color: beige;padding-bottom: 20px;padding-top: 20px;">
+        © 2020 All rights reserved. The use of COVID-19Base is free for academic and non-profit users.
+    </div>
+</footer>
+
+
+<!-- Bootstrap core JavaScript
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script
+        src="https://code.jquery.com/jquery-3.5.0.js"
+        integrity="sha256-r/AaFHrszJtwpe+tHyNi/XCfMxYpbsRg2Uqn0x3s2zc="
+        crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+        crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+        crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap-4-autocomplete/dist/bootstrap-4-autocomplete.min.js"
+        crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/js/all.min.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.devbridge-autocomplete/1.4.10/jquery.autocomplete.min.js"></script>
+<script>
+    $('.close').click(function () {
+        $('#ealert').hide();
+    });
+    //Search Functionality
+    $("#srch").autocomplete({
+        source: drugs,
+        treshold: 1,
+        maximumItems: 100,
+        onSelectItem: function () {
+            $('#srch').focus();
+        },
+    });
+    $("#categ").change(function () {
+        let tmp = $(this).val();
+        if (tmp == 'Drug-Disease') {
+            $("#srch").autocomplete({
+                source: ddpairs,
+                treshold: 1,
+                maximumItems: 100,
+                onSelectItem: function () {
+                    $('#srch').focus();
+                },
+            });
+        } else if (tmp == 'Diseases') {
+            $("#srch").autocomplete({
+                source: diseases,
+                treshold: 1,
+                maximumItems: 100,
+                onSelectItem: function () {
+                    $('#srch').focus();
+                },
+            });
+        } else if (tmp == 'Drugs') {
+            $("#srch").autocomplete({
+                source: drugs,
+                treshold: 1,
+                maximumItems: 100,
+                onSelectItem: function () {
+                    $('#srch').focus();
+                },
+            });
+        } else if (tmp == 'Genes') {
+            $("#srch").autocomplete({
+                source: genes,
+                treshold: 1,
+                maximumItems: 100,
+                onSelectItem: function () {
+                    $('#srch').focus();
+                },
+            });
+        } else if (tmp == 'miRNAs') {
+            $("#srch").autocomplete({
+                source: mirnas,
+                treshold: 1,
+                maximumItems: 100,
+                onSelectItem: function () {
+                    $('#srch').focus();
+                },
+            });
+        } else if (tmp == 'lncRNAs') {
+            $("#srch").autocomplete({
+                source: lncrnas,
+                treshold: 1,
+                maximumItems: 100,
+                onSelectItem: function () {
+                    $('#srch').focus();
+                },
+            });
+        } else if (tmp == 'PDBs') {
+            $("#srch").autocomplete({
+                source: pdbs,
+                treshold: 1,
+                maximumItems: 100,
+                onSelectItem: function () {
+                    $('#srch').focus();
+                },
+            });
+        } else if (tmp == 'Disease-Gene') {
+            $("#srch").autocomplete({
+                source: dgpairs,
+                treshold: 1,
+                maximumItems: 100,
+                onSelectItem: function () {
+                    $('#srch').focus();
+                },
+            });
+        } else if (tmp == 'Disease-miRNA') {
+            $("#srch").autocomplete({
+                source: dmpairs,
+                treshold: 1,
+                maximumItems: 100,
+                onSelectItem: function () {
+                    $('#srch').focus();
+                },
+            });
+        } else if (tmp == 'Disease-lncRNA') {
+            $("#srch").autocomplete({
+                source: dlpairs,
+                treshold: 1,
+                maximumItems: 100,
+                onSelectItem: function () {
+                    $('#srch').focus();
+                },
+            });
+        } else if (tmp == 'Drug-PDB') {
+            $("#srch").autocomplete({
+                source: dppairs,
+                treshold: 1,
+                maximumItems: 100,
+                onSelectItem: function () {
+                    $('#srch').focus();
+                },
+            });
+        }
+    });
+    $('#srch').keypress(function (event) {
+
+        var keycode = (event.keyCode ? event.keyCode : event.which);
+        if (keycode == '13') {
+            submitSearch();
+        }
+
+    });
+
+    function submitSearch() {
+        var tmp1 = {};
+        tmp1.categ = $('#categ').val();
+        tmp1.search = $('#srch').val();
+        if (tmp1.search.length === 0)
+            $('#ealert').show();
+        else {
+            document.querySelector('#obje').value = JSON.stringify(tmp1);
+            document.querySelector('#finalSub').submit();
+        }
+    }
+
+    //new Functionality
+    if(sps.length <= 1)
+        $('#foot').addClass('fixed-bottom');
+    $('#drg').text(drug);
+    $('#dis').text(disease);
+    $('#label').text(label);
+    if (doid !== '')
+        $("#dislink").attr("href", `https://disease-ontology.org/term/${doid}`);
+    else {
+        $("#dislink").attr("href", `#`);
+        $("#dislink").removeAttr("target");
+    }
+    if (dbankid !== '')
+        $("#drglink").attr("href", `https://www.drugbank.ca/drugs/${dbankid}`);
+    else {
+        $("#drglink").attr("href", `#`);
+        $("#drglink").removeAttr("target");
+    }
+    for (let i = 0; i < sps.length; i++) {
+        let htm = createHtml(i, sps[i]['sentence'], sps[i]['paper'], sps[i]['doi']);
+        addElement(`resTable`, 'tr', `sps${i}`, `shadow p-3 mb-5 rounded`, htm);
+    }
+
+    function submitFeed(id) {
+        var tmp1 = {};
+        tmp1.feed = $(`#feed${id}`).val();
+        tmp1.sent = sps[id]['Sid'];
+        $(`#feedsub${id}`).submit(function (event) {
+            event.preventDefault();
+            $.post(`/feedback`, tmp1);
+        });
+        $(`#feedsub${id}`).submit();
+        $(`#hid${id}`).hide();
+        $("#salert").fadeTo(2000, 500).slideUp(500, function(){
+            $("#salert").slideUp(500);
+        });
+    }
+
+    function createHtml(id, sent, pap, pdoi) {
+        let htm = `<td style="background-color: #f5ffe0">${sent}</td>
+                    <td style="background-color: #defffe">${pap}</td>
+                    <td style="background-color: #feffe6"><a target="_blank" href="https://doi.org/${pdoi}">${pdoi}</a></td>
+                    <td style="background-color: #fff2f5" id="hid${id}">
+                        <div class="input-group">
+                            <div class="input-group-btn search-panel">
+                                <select class="custom-select" id="feed${id}"
+                                        style="border: 1px solid firebrick">
+                                    <option value="Positive" selected>Postive</option>
+                                    <option value="Negative">Negative</option>
+                                    <option value="Not Sure">Not Sure</option>
+                                    <option value="Neutral">Neutral</option>
+                                </select>
+                            </div>
+                            <span class="input-group-btn">
+                                <button class="btn btn-default" onclick="submitFeed(${id})" type="button"
+                                style="border:1px solid mediumvioletred"><span class="fas fa-paper-plane fa-fw mr-1"></span></button>
+                            </span>
+                            <form action="/feedback" method="post" id="feedsub${id}">
+                            </form>
+                        </div>
+                    </td>`;
+        return htm;
+    }
+
+    function addElement(parentID, elementTag, elementID, cls, html) {
+        var p = document.getElementById(parentID);
+        var newElement = document.createElement(elementTag);
+        newElement.setAttribute('id', elementID);
+        newElement.setAttribute('class', cls);
+        newElement.style.overflow = "hidden";
+        newElement.innerHTML = html;
+        p.appendChild(newElement);
+    }
+</script>
+
+</body>
+</html>

@@ -1,0 +1,21 @@
+{
+  "name": "drugweb",
+  "version": "1.0.0",
+  "description": "Drugs Symptoms Website",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "clone": "^2.1.2",
+    "cookie-session": "^1.4.0",
+    "ejs": "^3.0.2",
+    "express": "^4.17.1",
+    "express-session": "^1.17.1",
+    "mongodb": "^3.5.7",
+    "mysql": "^2.18.1"
+  }
+}

@@ -9,6 +9,11 @@ This is the implementation of the website for my paper published in JMIR Medical
 
 We explored the potential of machine intelligence to automatically mine the scientific literature, with the goal of developing the first comprehensive knowledge base that integrates several biomedical entities associated with COVID-19/SARS-CoV-2. 
 
+## Working version
+A working Demo of the website is available at:
+
+[CovidBase](http://77.68.43.135:96/)
+
 
 ## Backend tools used
 

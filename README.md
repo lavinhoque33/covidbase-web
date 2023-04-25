@@ -12,7 +12,7 @@ We explored the potential of machine intelligence to automatically mine the scie
 ## Working DEMO
 A working version of the website is available at:
 
-[CovidBase](http://77.68.43.135:96/)
+[CovidBase](http://77.68.43.135:97/)
 
 
 ## Backend tools used

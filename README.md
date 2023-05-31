@@ -17,14 +17,14 @@ A working version of the website is available at:
 
 ## Backend tools used
 
-- NodeJS(Angular)
+- NodeJS(with Express)
 - NoSQL (MongoDB)
 
 ## Frontend tools
 
 - MaterializeCSS (CSS)
 - HTML
-- Javascript
+- Javascript(Angular)
 
 ## How to Run
 
